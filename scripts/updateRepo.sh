@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-ssh suilabs@suilabs.com <<< "
+ssh -T suilabs@suilabs.com <<< "
 cd Projects/hathsin
-git pull origin master && \
-docker-compose up --build -d"
+git reset --hard origin/HEAD && \
+docker-compose build --no-cache && \
+docker-compose up -d"

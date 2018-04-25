@@ -15,5 +15,11 @@ pipelines:
           script:
             - npm install
             - npm test
+      - step:
+          name: Deploy to production
+          image: kroniak/ssh-client
+          deployment: production
+          trigger: manual
+          script:
             - cd scripts
             - bash updateRepo.sh

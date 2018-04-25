@@ -17,6 +17,8 @@
   "author": "ShakMR",
   "license": "MIT",
   "dependencies": {
+    "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.0",
@@ -33,7 +35,6 @@
     "webpack": "^3.8.1"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
     "chai": "^4.1.2",
     "istanbul": "^0.4.5",
     "mocha": "^4.0.1",
