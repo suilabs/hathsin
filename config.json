@@ -1,0 +1,16 @@
+{
+    "dev": {
+        "database": {
+            "root": "storage",
+            "file": "database.json",
+            "schema": "model/model.graphqls"
+        }
+    },
+    "test": {
+        "database": {
+            "root": ":memory:",
+            "file": "",
+            "schema": "model/model.graphqls"
+        }
+    }
+}

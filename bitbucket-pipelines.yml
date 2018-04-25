@@ -1,0 +1,19 @@
+image: node:8.9.4
+pipelines:
+  branches:
+    SOFT:
+      - step:
+          caches:
+            - node
+          script:
+            - npm install
+            - npm test
+    master:
+      - step:
+          caches:
+            - node
+          script:
+            - npm install
+            - npm test
+            - cd scripts
+            - bash updateRepo.sh

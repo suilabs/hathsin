@@ -1,0 +1,44 @@
+{
+  "name": "suilabs-backend",
+  "version": "1.0.0",
+  "description": "Backend server for suilabs web",
+  "main": "server",
+  "scripts": {
+    "test": "GRAPHQL_PORT=4001 NODE_ENV=test nyc --reporter html --reporter text mocha --timeout=3000",
+    "init": "echo {} ./storage/database && npm install",
+    "start:dev": "NODE_ENV=dev babel-node ./src/server.js",
+    "start": "node build/server.js",
+    "build:server": "babel -d ./build ./src && cp ./src/model/model.graphqls ./build/model/"
+  },
+  "keywords": [
+    "server",
+    "backend"
+  ],
+  "author": "ShakMR",
+  "license": "MIT",
+  "dependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-stage-0": "^6.24.1",
+    "body-parser": "^1.18.2",
+    "chai-http": "^3.0.0",
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "graphql": "^0.11.7",
+    "graphql-server-express": "^1.2.0",
+    "graphql-tools": "^2.7.0",
+    "sha1": "^1.1.1",
+    "v8flags": "^3.0.1",
+    "webpack": "^3.8.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "chai": "^4.1.2",
+    "istanbul": "^0.4.5",
+    "mocha": "^4.0.1",
+    "nyc": "^11.2.1",
+    "sinon": "^4.0.1",
+    "type-detect": "^4.0.3"
+  }
+}

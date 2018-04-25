@@ -1,0 +1,12 @@
+version: '3'
+services:
+  backend:
+    build: .
+    container_name: hathsin
+    volumes:
+      - ./storage:/usr/src/app/storage
+
+networks:
+  default:
+    external:
+      name: webplatform_suilabs
