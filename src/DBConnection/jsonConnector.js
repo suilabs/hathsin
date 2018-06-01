@@ -18,26 +18,16 @@ const JSONDriver = {
       dbjson = {};
       JSONDriver.isMemory = true;
     } else {
-      dbjson = JSON.parse(fs.readFileSync(databaseFileName, { encoding: 'utf8' }));
-    }
-
-    /* istanbul ignore else */
-    if (Utils.isEmptyObject(dbjson)) {
-      dbjson = {
-        projects: {},
-        types: {
-          type1: {
-            key: 'type1',
-            name: 'Imatge Corporativa',
-          },
-        },
-      };
-      JSONDriver.writeDB('Init DB');
+      if (fs.existsSync(databaseFileName)) {
+        dbjson = JSON.parse(fs.readFileSync(databaseFileName, { encoding: 'utf8' }));
+      } else {
+        dbjson = {};
+      }
     }
     return null;
   },
   getVariables: () => {
-    const env = process.env.NODE_ENV;
+    const env = process.env.NODE_ENV || 'test';
     const dbRoot = config[env].database.root;
     const storageFolder = dbRoot[0] === '/' ? dbRoot : path.join(__dirname, `../../${dbRoot}`);
     const databaseFileName = path.join(storageFolder, config[env].database.file);
@@ -83,6 +73,9 @@ const JSONDriver = {
   },
   insert: (object, element, persist = true) => {
     JSONDriver.init();
+    if (!(object in dbjson)) {
+      dbjson[object] = {};
+    }
     dbjson[object][element.key] = element;
     if (persist) {
       JSONDriver.writeDB(`Insert_${object}_${element.key}`);
