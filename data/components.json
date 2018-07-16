@@ -1,0 +1,17 @@
+[
+  {
+    "id": "D1B75133-6D96-4D78-AFB1-4EF0E83FAC62",
+    "name": "text",
+    "type": "TEXT"
+  },
+  {
+    "id": "1473BC8D-763E-4DD6-9127-5B36C88C2797",
+    "name": "image",
+    "type": "IMAGE"
+  },
+  {
+    "id": "9DF0CFD0-244C-4789-921E-1765FA8C0CAD",
+    "name": "image strip",
+    "type": "ARRAY_IMAGE"
+  }
+]

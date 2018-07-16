@@ -2,11 +2,25 @@ version: '3'
 services:
   hathsin:
     build: .
-    container_name: hathsin
+    container_name: hathsinV2
     ports:
-      - 4000:4000
+      - 4001:4000
+    environment:
+    - DB_SERVER=hathsin-database
+    - DB_SCHEMA=hathsin
+    depends_on:
+      - hathsin-database
+  hathsin-database:
+    image: mongo:latest
+    container_name: hathsin-database
+    environment:
+    - MONGO_DATA_DIR=/data/db
+    - MONGO_LOG_DIR=/dev/null
     volumes:
-      - ./storage:/usr/src/app/storage
+    - ./db:/data/db
+    ports:
+    - 27017:27017
+    command: mongod --smallfiles # --quiet
 
 networks:
   default:

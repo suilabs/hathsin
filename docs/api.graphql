@@ -1,0 +1,107 @@
+type Section {
+  id: ID!
+  name: String!
+}
+
+type ProjectType {
+  id: ID!
+  name: String!
+}
+
+type Image {
+  id: ID!
+  name: String!
+  url: String!
+}
+
+type Configuration {
+  component: Component!
+  value: String
+}
+
+type Project {
+  id: ID!
+  name: String!
+  url: String!
+  cover: Image!
+  type: ProjectType!
+  description: String
+  textPool: [String]
+  section: Section!
+  template: Template!
+  configuration: [Configuration]
+}
+
+type Component {
+  id: ID!
+  name: String!
+  type: String!
+}
+
+type Template {
+  id: ID!
+  name: String!
+  rows: [[Component]]
+}
+
+type Query {
+  projects: [Project]
+  project(id: ID): Project
+
+  images: [Image]
+  image(id: ID): Image
+
+  projectTypes: [ProjectType]
+  projectType(id: ID): ProjectType
+
+  sections: [Section]
+  section(id: ID): Section
+
+  templates: [Template]
+}
+
+
+input ConfigurationInput {
+  component: String!
+  value: String
+}
+
+input ProjectInput {
+  url: String!
+  name: String!
+  cover: String! # id of the image to use.
+  type: String! # id of the section to use.
+  description: String
+  section: String! #id of the section to use.
+  template: String!
+  configuration: [ConfigurationInput]
+}
+
+input UpdateProjectInput {
+  url: String
+  name: String
+  cover: String # id of the image to use.
+  type: String # id of the section to use.
+  description: String
+  section: String #id of the section to use.
+  template: String
+  configuration: [ConfigurationInput]
+}
+
+type Mutation {
+  insertProject(project: ProjectInput): Project
+  updateProject(id: String!, project: UpdateProjectInput): Project
+  deleteProjects(ids: [String]!): [Project]
+
+  insertImage(name: String!, url: String!): Image
+  updateImage(id: String!, name: String!, url: String!): Image
+  deleteImages(ids: [String]!): [Image]
+
+  insertProjectType(name: String!): ProjectType
+  updateProjectType(id: String!, name: String!): ProjectType
+  deleteProjectTypes(ids: [String]!): [ProjectType]
+
+  insertSection(name: String!): Section
+  updateSection(id: String!, name: String!): Section
+  deleteSections(ids: [String]!): [Section]
+}
