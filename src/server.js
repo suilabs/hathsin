@@ -28,6 +28,8 @@ if (process.env.NODE_ENV === 'dev') {
   app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
 }
 
+app.use(cors());
+
 app.use(bodyParser.json());
 app.post('*', (req, res, next) => {
   const { query, password } = req.body;
@@ -43,7 +45,7 @@ app.post('*', (req, res, next) => {
     res.status(403).send(errorMessage(err));
   }
 });
-app.use('/graphql', cors(), graphqlExpress({ schema }));
+app.use('/graphql', graphqlExpress({ schema }));
 const server = app.listen(GRAPHQL_PORT, () => console.log('Now browse to localhost:4000/graphiql'));
 
 module.exports = server;
