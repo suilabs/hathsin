@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-ssh -T suilabs@suilabs.com <<< "
+ssh -tt -o StrictHostKeyChecking=no suilabs@suilabs.com <<< "
 cd Projects/hathsin
 git fetch && \
 git reset --hard origin/HEAD && \
