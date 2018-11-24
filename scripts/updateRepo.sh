@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-PROJECT_NAME=hathsinV3
+PROJECT_NAME=hathsinV2
 ssh -tt -o StrictHostKeyChecking=no suilabs@suilabs.com <<< "mkdir -p Projects/${PROJECT_NAME}; exit" && \
 rsync -rpulz --verbose ${PWD}/../* suilabs@suilabs.com:./Projects/${PROJECT_NAME}/. && \
 export LC_PROJECT_NAME=${PROJECT_NAME} && \
