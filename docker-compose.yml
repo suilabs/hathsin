@@ -8,6 +8,8 @@ services:
     environment:
     - DB_SERVER=hathsin-database
     - DB_SCHEMA=hathsin
+    - MONGO_USERNAME=MONGO_USERNAME
+    - MONGO_PASSWORD=MONGO_PASSWORD
     depends_on:
       - hathsin-database
   hathsin-database:
@@ -16,11 +18,14 @@ services:
     environment:
     - MONGO_DATA_DIR=/data/db
     - MONGO_LOG_DIR=/dev/null
+    - MONGO_INITDB_DATABASE=hathsin
+    - MONGO_INITDB_ROOT_USERNAME=$MONGO_USERNAME
+    - MONGO_INITDB_ROOT_PASSWORD=$MONGO_PASSWORD
     volumes:
     - ./db:/data/db
     ports:
     - 27017:27017
-    command: mongod --smallfiles # --quiet
+    command: mongod --smallfiles --auth # --quiet
 
 networks:
   default:

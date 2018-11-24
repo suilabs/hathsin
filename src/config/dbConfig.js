@@ -52,16 +52,21 @@ const dbSetup = {
    */
   init(config) {
     // Build the connection string
-    const dbURI = `mongodb://${config.DB_SERVER}:${config.DB_PORT}/${config.DB_SCHEMA}`;
+    const dbURI = `mongodb://${config.DB_USER}:${config.DB_PASSWORD}@${config.DB_SERVER}:${config.DB_PORT}/${config.DB_SCHEMA}?authSource=admin`;
 
     // Create the database connection
-    connectWithRetry(dbURI, { server: { auto_reconnect: true, reconnectTries: Number.MAX_VALUE } });
+    connectWithRetry(dbURI, {
+      server: {
+        auto_reconnect: true,
+        reconnectTries: Number.MAX_VALUE
+      },
+    });
 
     // CONNECTION EVENTS
     // When successfully connected
     mongoose.connection.on('connected', () => {
       // eslint-disable-next-line no-console
-      console.log(`Mongoose default connection open to ${dbURI}`);
+      console.log(`Mongoose default connection open`);
     });
 
     // If the connection throws an error

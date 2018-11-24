@@ -38,6 +38,8 @@ workflows:
       - release:
           filters:
             branches:
-              only: master
+              only:
+                - master
+                - SOFT-28_AdminPage
           requires:
             - build
