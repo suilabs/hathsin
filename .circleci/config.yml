@@ -9,19 +9,24 @@ jobs:
       - image: circleci/node:8.9.0
     steps:
       - checkout
-      - run: cd ./service
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "./service/package.json" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
-      - run: npm install
+      - run: |
+        cd ./service
+        npm install
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "./service/package.json" }}
-      - run: npm test
-      - run: npm build
+      - run: |
+          cd ./service
+          npm test
+      - run: |
+          cd ./service
+          npm build
   release:
     docker:
       - image: circleci/node:8.9.0
