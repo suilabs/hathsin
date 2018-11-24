@@ -7,9 +7,9 @@ jobs:
   build:
     docker:
       - image: circleci/node:8.9.0
-    working_directory: ./service
     steps:
       - checkout
+      - run: cd ./service
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "package.json" }}
