@@ -8,4 +8,4 @@ ssh -tt -o SendEnv=PROJECT_NAME -o StrictHostKeyChecking=no suilabs@suilabs.com 
 cd Projects/${LC_PROJECT_NAME}
 docker-compose up -d hathsin-database && \
 docker-compose up -d --build hathsin;
-exit 0"
+exit"

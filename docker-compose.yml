@@ -1,7 +1,8 @@
 version: '3'
 services:
   hathsin:
-    build: .
+    build:
+      context: .
     container_name: hathsinV2
     ports:
       - 4001:4000
