@@ -15,18 +15,18 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
       - run: |
-        cd ./service
-        npm install
+          cd ./service
+          npm install
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "./service/package.json" }}
       - run: |
-        cd ./service
-        npm test
+          cd ./service
+          npm test
       - run: |
-        cd ./service
-        npm build
+          cd ./service
+          npm build
   release:
     docker:
       - image: circleci/node:8.9.0
