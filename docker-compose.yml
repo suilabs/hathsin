@@ -10,8 +10,6 @@ services:
     - DB_SCHEMA=hathsin
     - MONGO_USERNAME=$MONGO_USERNAME
     - MONGO_PASSWORD=$MONGO_PASSWORD
-    depends_on:
-      - hathsin-database
   hathsin-database:
     image: mongo:latest
     container_name: hathsin-database
