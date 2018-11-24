@@ -28,6 +28,7 @@ jobs:
       - checkout
       - deploy:
           command: |
+            sudo apt install -y rsync
             cd scripts
             bash updateRepo.sh
 workflows:
