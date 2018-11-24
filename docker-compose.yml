@@ -8,8 +8,8 @@ services:
     environment:
     - DB_SERVER=hathsin-database
     - DB_SCHEMA=hathsin
-    - MONGO_USERNAME=MONGO_USERNAME
-    - MONGO_PASSWORD=MONGO_PASSWORD
+    - MONGO_USERNAME=$MONGO_USERNAME
+    - MONGO_PASSWORD=$MONGO_PASSWORD
     depends_on:
       - hathsin-database
   hathsin-database:
