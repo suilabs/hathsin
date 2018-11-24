@@ -22,11 +22,11 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "./service/package.json" }}
       - run: |
-          cd ./service
-          npm test
+        cd ./service
+        npm test
       - run: |
-          cd ./service
-          npm build
+        cd ./service
+        npm build
   release:
     docker:
       - image: circleci/node:8.9.0
