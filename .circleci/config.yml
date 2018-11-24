@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       - image: circleci/node:8.9.0
-    working_directory: ${CIRCLE_WORKING_DIRECTORY}/service
+    working_directory: ./service
     steps:
       - checkout
       - restore_cache:
