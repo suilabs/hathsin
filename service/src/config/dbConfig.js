@@ -52,7 +52,7 @@ const dbSetup = {
    */
   init(config) {
     // Build the connection string
-    const dbURI = `mongodb://${config.DB_USER}:${config.DB_PASSWORD}@${config.DB_SERVER}:${config.DB_PORT}/${config.DB_SCHEMA}?authSource=admin`;
+    const dbURI = `mongodb://${config.DB_USER}:${config.DB_PASSWORD}@${config.DB_SERVER}:${config.DB_PORT}/${config.DB_SCHEMA}`;
 
     // Create the database connection
     connectWithRetry(dbURI, {
