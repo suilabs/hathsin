@@ -46,7 +46,6 @@ class ProjectModel extends AbstractModel {
     const cover = await ImageModel.getById(project.cover);
     const section = await SectionModel.getById(project.section);
     const type = await ProjectTypeModel.getById(project.type);
-    const template = await TemplateModel.getById(project.template);
     const configuration = project.configuration;
     configuration.forEach(async conf => {
       conf.component = await ComponentsModel.findById(conf.component);
@@ -56,7 +55,6 @@ class ProjectModel extends AbstractModel {
       cover,
       section,
       type,
-      template,
       configuration
     };
   }

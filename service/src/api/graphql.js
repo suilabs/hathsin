@@ -5,14 +5,12 @@ import ProjectResolvers from './Project';
 import ImageResolvers from './Image';
 import ProjectTypeResolvers from './ProjectType';
 import SectionResolvers from './Section';
-import TemplateResolvers from './Template';
 
 const resolvers = [
   ProjectResolvers,
   ImageResolvers,
   ProjectTypeResolvers,
   SectionResolvers,
-  TemplateResolvers,
 ];
 
 module.exports = makeExecutableSchema({
