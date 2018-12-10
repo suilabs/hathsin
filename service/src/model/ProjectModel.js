@@ -4,12 +4,10 @@ import CommonTypes from './common';
 import ImageModel from './ImageModel';
 import SectionModel from './SectionModel';
 import ProjectTypeModel from './ProjectTypeModel';
-import TemplateModel from "./TemplateModel";
-import ComponentsModel from './ComponentsModel';
 
 const configurationSchema = new Schema({
-  component: {type: String, ref: 'components'},
-  value: String,
+  componentId: String,
+  propsJson: String,
 });
 
 class ProjectModel extends AbstractModel {
@@ -23,7 +21,6 @@ class ProjectModel extends AbstractModel {
     cover: {type: String, ref: 'images'},
     section: {type: String, ref: 'sections'},
     type: {type: String, ref: 'projectTypes'},
-    template: {type: String, ref: 'templates'},
     configuration: [configurationSchema],
   };
 
@@ -46,16 +43,11 @@ class ProjectModel extends AbstractModel {
     const cover = await ImageModel.getById(project.cover);
     const section = await SectionModel.getById(project.section);
     const type = await ProjectTypeModel.getById(project.type);
-    const configuration = project.configuration;
-    configuration.forEach(async conf => {
-      conf.component = await ComponentsModel.findById(conf.component);
-    });
     return {
       ...project,
       cover,
       section,
       type,
-      configuration
     };
   }
 }

@@ -51,8 +51,14 @@ const dbSetup = {
    * @returns {void}
    */
   init(config) {
+
+    let dbURI;
     // Build the connection string
-    const dbURI = `mongodb://${config.DB_USER}:${config.DB_PASSWORD}@${config.DB_SERVER}:${config.DB_PORT}/${config.DB_SCHEMA}`;
+    if (config.DB_USER && config.DB_PASSWORD) {
+      dbURI = `mongodb://${config.DB_USER}:${config.DB_PASSWORD}@${config.DB_SERVER}:${config.DB_PORT}/${config.DB_SCHEMA}`;
+    } else {
+      dbURI = `mongodb://${config.DB_SERVER}:${config.DB_PORT}/${config.DB_SCHEMA}`;
+    }
 
     // Create the database connection
     connectWithRetry(dbURI, {
