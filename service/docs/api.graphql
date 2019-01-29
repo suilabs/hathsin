@@ -26,13 +26,14 @@ type Project {
   cover: Image!
   type: ProjectType!
   description: String
-  textPool: [String]
   section: Section!
   configuration: [Configuration]
+  languages : [String]
 }
 
 type Query {
   projects: [Project]
+  projectsByLanguage(lang: String): [Project]
   project(id: ID): Project
 
   images: [Image]
@@ -59,6 +60,7 @@ input ProjectInput {
   description: String
   section: String! #id of the section to use.
   configuration: [ConfigurationInput]
+  languages: [String]
 }
 
 input UpdateProjectInput {
@@ -69,6 +71,7 @@ input UpdateProjectInput {
   description: String
   section: String #id of the section to use.
   configuration: [ConfigurationInput]
+  languages: [String]
 }
 
 type Mutation {

@@ -10,6 +10,15 @@ const configurationSchema = new Schema({
   propsJson: String,
 });
 
+const doesMatchCriteria = (criteria, project) => {
+  Object.entries(criteria).forEach(([key, value]) => {
+    if (project[key] !== value) {
+      return false;
+    }
+  });
+  return true;
+};
+
 class ProjectModel extends AbstractModel {
   static modelName = 'projects';
   static schema = {
@@ -22,14 +31,17 @@ class ProjectModel extends AbstractModel {
     section: {type: String, ref: 'sections'},
     type: {type: String, ref: 'projectTypes'},
     configuration: [configurationSchema],
+    languages: [String],
   };
 
   constructor() {
     super(ProjectModel.modelName, ProjectModel.schema);
   }
 
-  async getAll() {
-    const projects = await super.getAll();
+  async getAll(criteria = {}) {
+    const projects = (await super.getAll()).filter((project) => {
+      return doesMatchCriteria(criteria, project);
+    });
     return projects.map(async project => this.populate(project));
   }
 

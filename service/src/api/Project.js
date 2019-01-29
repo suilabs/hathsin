@@ -8,6 +8,9 @@ export default {
     async projects() {
       return Project.getAll();
     },
+    async projectsByLanguage(parent, { language }) {
+      return Project.getAll({ language })
+    }
   },
   Mutation: {
     async insertProject(parent, { project: newProject }, context, info) {
