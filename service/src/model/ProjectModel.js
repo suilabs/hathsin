@@ -11,12 +11,9 @@ const configurationSchema = new Schema({
 });
 
 const doesMatchCriteria = (criteria, project) => {
-  Object.entries(criteria).forEach(([key, value]) => {
-    if (project[key] !== value) {
-      return false;
-    }
+  return Object.entries(criteria).every(([key, criteriaFunction]) => {
+    return criteriaFunction(project[key]);
   });
-  return true;
 };
 
 class ProjectModel extends AbstractModel {
@@ -39,10 +36,10 @@ class ProjectModel extends AbstractModel {
   }
 
   async getAll(criteria = {}) {
-    const projects = (await super.getAll()).filter((project) => {
-      return doesMatchCriteria(criteria, project);
-    });
-    return projects.map(async project => this.populate(project));
+    const projects = (await super.getAll());
+    return Promise.all(projects
+      .filter(project => doesMatchCriteria(criteria, project))
+      .map(project => this.populate(project)));
   }
 
   async getById(id) {

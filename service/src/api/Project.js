@@ -8,8 +8,10 @@ export default {
     async projects() {
       return Project.getAll();
     },
-    async projectsByLanguage(parent, { language }) {
-      return Project.getAll({ language })
+    async projectsByLanguage(parent, { lang }) {
+      return Project.getAll({ languages: (languagesArray) => {
+        return languagesArray.indexOf(lang) !== -1;
+      } })
     }
   },
   Mutation: {
