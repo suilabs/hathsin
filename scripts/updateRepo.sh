@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
-ssh -tt -o StrictHostKeyChecking=no suilabs@suilabs.com <<< "
-cd Projects/hathsin
-git fetch && \
-git reset --hard origin/HEAD && \
-docker-compose up -d --build;
+LC_PROJECT_NAME=hathsinV2
+ssh -tt -o StrictHostKeyChecking=no suilabs@suilabs.com <<< "mkdir -p Projects/${LC_PROJECT_NAME}; exit" && \
+rsync -rpulz --verbose ${PWD}/../* suilabs@suilabs.com:./Projects/${LC_PROJECT_NAME}/. && \
+ssh -tt -o SendEnv=PROJECT_NAME -o StrictHostKeyChecking=no suilabs@suilabs.com <<< "
+cd Projects/${LC_PROJECT_NAME}
+docker-compose up -d hathsin-database && \
+docker-compose up -d --build hathsin;
 exit"

@@ -11,16 +11,23 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "package.json" }}
+          - v1-dependencies-{{ checksum "./service/package.json" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
-      - run: npm install
+      - run: |
+          cd ./service
+          npm install
       - save_cache:
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-      - run: npm test
-      - run: npm build
+          key: v1-dependencies-{{ checksum "./service/package.json" }}
+      - run: |
+          echo $CIRCLE_PROJECT_REPONAME
+          cd ./service
+          npm build
+      - run: |
+          cd ./service
+          npm test
   release:
     docker:
       - image: circleci/node:8.9.0
@@ -28,8 +35,10 @@ jobs:
       - checkout
       - deploy:
           command: |
+            sudo apt update
+            sudo apt install -y rsync
             cd scripts
-            bash updateRepo.sh
+            bash updateRepo.sh >/dev/null
 workflows:
   version: 2
   build_and_deploy:
@@ -38,6 +47,7 @@ workflows:
       - release:
           filters:
             branches:
-              only: master
+              only:
+                - master
           requires:
             - build
