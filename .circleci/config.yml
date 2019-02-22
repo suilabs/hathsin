@@ -49,6 +49,5 @@ workflows:
             branches:
               only:
                 - master
-                - SOFT-28_AdminPage
           requires:
             - build
