@@ -12,6 +12,7 @@ type Image {
   id: ID!
   name: String!
   url: String!
+  filename: String!
 }
 
 type Configuration {
@@ -79,8 +80,8 @@ type Mutation {
   updateProject(id: String!, project: UpdateProjectInput): Project
   deleteProjects(ids: [String]!): [Project]
 
-  insertImage(name: String!, url: String!): Image
-  updateImage(id: String!, name: String!, url: String!): Image
+  insertImage(name: String!, url: String!, filename: String!): Image
+  updateImage(id: String!, name: String!, url: String!, filename: String!): Image
   deleteImages(ids: [String]!): [Image]
 
   insertProjectType(name: String!): ProjectType

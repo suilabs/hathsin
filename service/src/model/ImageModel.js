@@ -6,6 +6,7 @@ class ImageModel extends AbstractModel {
   static schema = {
     ...CommonTypes.idNameSchema,
     url: String,
+    filename: String,
   };
 
   constructor() {
