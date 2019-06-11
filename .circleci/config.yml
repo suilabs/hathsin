@@ -30,7 +30,7 @@ jobs:
           npm test
   release:
     docker:
-      - image: circleci/node:8.9.0
+      - image: circleci/node:lts
     steps:
       - checkout
       - deploy:
