@@ -16,8 +16,8 @@ export default class AbstractModel {
     this.model = mongoose.model(name, this.schema);
   }
 
-  async getAll(info) {
-    const results = await this.model.find({}, info);
+  async getAll(criteria = {}, info) {
+    const results = await this.model.find(criteria, info);
     return results.map(result => project(result.toObject()));
   }
 

@@ -32,5 +32,6 @@ module.exports = makeExecutableSchema({
         }
       }, {})
     },
+    Project: ProjectResolvers.Project,
   },
 });

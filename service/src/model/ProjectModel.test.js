@@ -21,10 +21,6 @@ const MockDependentClass = {
   getById: (id) => Promise.resolve(id)
 };
 
-jest.mock('./ImageModel', () => MockDependentClass);
-jest.mock('./SectionModel', () => MockDependentClass);
-jest.mock('./ProjectTypeModel', () => MockDependentClass);
-
 describe('ProjectModel', () => {
   beforeEach(() => {
     ProjectModel.populate = jest.fn((p) => Promise.resolve(p));
@@ -38,14 +34,4 @@ describe('ProjectModel', () => {
     expect(p[1].id).toBe(mockProjects[1]._id);
     expect(p[2].id).toBe(mockProjects[2]._id);
   });
-
-  it('should return all matching function criteria', async () => {
-    const p = await ProjectModel.getAll({
-      l: (l) => l === 1,
-    })
-
-    expect(p.length).toBe(2);
-    expect(p[0].id).toBe(mockProjects[0]._id);
-    expect(p[1].id).toBe(mockProjects[1]._id);
-  })
 });

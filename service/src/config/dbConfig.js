@@ -64,8 +64,9 @@ const dbSetup = {
     connectWithRetry(dbURI, {
       server: {
         auto_reconnect: true,
-        reconnectTries: Number.MAX_VALUE
+        reconnectTries: Number.MAX_VALUE,
       },
+      useNewUrlParser: true
     });
 
     // CONNECTION EVENTS

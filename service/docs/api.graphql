@@ -20,10 +20,17 @@ type Configuration {
   propsJson: String!
 }
 
+enum Status {
+  PUBLISHED
+  DRAFT
+  DELETED
+}
+
 type Project {
   id: ID!
   name: String!
   url: String!
+  status: Status!
   cover: Image!
   type: ProjectType!
   description: String
@@ -33,7 +40,8 @@ type Project {
 }
 
 type Query {
-  projects: [Project]
+  projects(status: Status = PUBLISHED): [Project]
+  draftProjects: [Project]
   projectsByLanguage(lang: String): [Project]
   project(id: ID): Project
 
@@ -67,6 +75,7 @@ input ProjectInput {
 input UpdateProjectInput {
   url: String
   name: String
+  status: Status
   cover: String # id of the image to use.
   type: String # id of the section to use.
   description: String
