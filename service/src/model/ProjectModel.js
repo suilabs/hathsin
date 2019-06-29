@@ -1,20 +1,11 @@
 import { Schema } from 'mongoose';
 import AbstractModel from './AbstractModel';
 import CommonTypes from './common';
-import ImageModel from './ImageModel';
-import SectionModel from './SectionModel';
-import ProjectTypeModel from './ProjectTypeModel';
 
 const configurationSchema = new Schema({
   componentId: String,
   propsJson: String,
 });
-
-const doesMatchCriteria = (criteria, project) => {
-  return Object.entries(criteria).every(([key, criteriaFunction]) => {
-    return criteriaFunction(project[key]);
-  });
-};
 
 export const STATUS = {
   PUBLISHED: "PUBLISHED",
@@ -43,13 +34,11 @@ class ProjectModel extends AbstractModel {
   }
 
   async getAllByStatus(status) {
-    return this.getAll({ status: (p) => p === status });
+    return this.getAll({ status });
   }
 
-  async getAll(criteria = {}) {
-    const projects = (await super.getAll());
-    return Promise.all(projects
-      .filter(project => doesMatchCriteria(criteria, project)));
+  async getPublishedAndDraft() {
+    return this.getAll({ status: { $in: [STATUS.DRAFT, STATUS.PUBLISHED]}})
   }
 }
 

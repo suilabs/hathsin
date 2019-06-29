@@ -4,7 +4,9 @@ import SectionModel from '../model/SectionModel';
 import ProjectTypeModel from '../model/ProjectTypeModel';
 
 const project = (parent, { id } ) => Project.getById(id);
-const projects = () => Project.getAll();
+const projects = (parent, { status }) => Project.getAllByStatus(status);
+const draftProjects = () => Project.getPublishedAndDraft();
+
 const projectsByLanguage = (parnet, { id }) =>
   Project.getAll({
       languages: (languagesArray) => languagesArray.indexOf(lang) !== -1
@@ -15,11 +17,7 @@ const insertProject = (parent, { project }) => {
   return Project.create(project);
 };
 
-const updateProject = async (parent, { id, project }) => {
-  debugger;
-  const res = await Project.update(id, project);
-  return res;
-}
+const updateProject = (parent, { id, project }) => Project.update(id, project);
 const deleteProjects = (parent, { ids }) => {
   const deletedProjects = [];
   ids.forEach(id => {
@@ -32,6 +30,7 @@ export default {
   Query: {
     project,
     projects,
+    draftProjects,
     projectsByLanguage
   },
   Mutation: {

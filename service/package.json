@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest src/",
     "start:watch": "nodemon --exec npm run start:dev",
-    "start:dev": "NODE_ENV=dev babel-node ./src/server.js",
+    "start:dev": "NODE_ENV=dev node -r @babel/register ./src/server.js",
     "start": "node build/server.js",
     "build:server": "NODE_ENV=production babel -d ./build ./src && mkdir -p ./build/docs && cp ./docs/* ./build/docs/*"
   },
@@ -23,9 +23,11 @@
     "@babel/plugin-transform-runtime": "^7.4.4",
     "@babel/polyfill": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
+    "@babel/register": "^7.4.4",
     "@babel/runtime": "^7.4.5",
     "babel-loader": "^8.0.0",
     "body-parser": "^1.18.3",
+    "core-js": "^3.1.4",
     "cors": "^2.8.4",
     "eslint": "^4.19.1",
     "express": "^4.16.3",

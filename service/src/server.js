@@ -1,8 +1,10 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
-import 'babel-polyfill';
+import 'core-js';
+import 'regenerator-runtime/runtime';
 import { graphiqlExpress, graphqlExpress } from 'graphql-server-express';
+
 import schema from './api/graphql';
 import dbConfig from './config/dbConfig';
 import serverConfig from './config/serverConfig';

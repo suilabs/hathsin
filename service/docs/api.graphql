@@ -40,8 +40,8 @@ type Project {
 }
 
 type Query {
-  projects(status: Status = PENDING): [Project]
-  projectsIncludeDraft: [Project]
+  projects(status: Status = PUBLISHED): [Project]
+  draftProjects: [Project]
   projectsByLanguage(lang: String): [Project]
   project(id: ID): Project
 
