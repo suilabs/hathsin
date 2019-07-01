@@ -7,9 +7,10 @@ const project = (parent, { id } ) => Project.getById(id);
 const projects = (parent, { status }) => Project.getAllByStatus(status);
 const draftProjects = () => Project.getPublishedAndDraft();
 
-const projectsByLanguage = (parnet, { id }) =>
+const projectsByLanguage = (parent, { id, lang }) =>
   Project.getAll({
-      languages: (languagesArray) => languagesArray.indexOf(lang) !== -1
+    languages: lang,
+    status: 'PUBLISHED'  
   });
 
 const insertProject = (parent, { project }) => {
