@@ -1,9 +1,10 @@
-version: '3'
+version: '3.7'
 services:
   hathsin:
     build:
       context: service
     container_name: hathsinV2
+    restart: always
     ports:
       - 4001:4000
     environment:
