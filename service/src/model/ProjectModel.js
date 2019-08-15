@@ -40,6 +40,10 @@ class ProjectModel extends AbstractModel {
   async getPublishedAndDraft() {
     return this.getAll({ status: { $in: [STATUS.DRAFT, STATUS.PUBLISHED]}})
   }
+
+  async delete(id) {
+    return super.update(id, { status: STATUS.DELETED });
+  }
 }
 
 export default new ProjectModel();
