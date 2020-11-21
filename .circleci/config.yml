@@ -50,6 +50,6 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - primary
           requires:
             - build
