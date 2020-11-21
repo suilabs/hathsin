@@ -45,6 +45,8 @@ workflows:
     jobs:
       - build
       - release:
+          context:
+            - mongo_db
           filters:
             branches:
               only:
