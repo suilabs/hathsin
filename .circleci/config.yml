@@ -24,7 +24,7 @@ jobs:
       - run: |
           echo $CIRCLE_PROJECT_REPONAME
           cd ./service
-          npm build
+          npm run build:service
       - run: |
           cd ./service
           npm test
