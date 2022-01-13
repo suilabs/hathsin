@@ -13,8 +13,8 @@ export default {
     async insertImage(parent, newImage, context, info) {
       return ImageModel.create(newImage);
     },
-    async updateImage(parent, { id, name, url, filename }, context, info) {
-      return ImageModel.update(id, { name, url, filename });
+    async updateImage(parent, { id, name, url, thumbnailUrl, filename }, context, info) {
+      return ImageModel.update(id, { name, url, thumbnailUrl, filename });
     },
     async deleteImages(parent, { ids }, context, info) {
       const deleteImages = [];
