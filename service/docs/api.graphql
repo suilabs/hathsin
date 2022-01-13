@@ -12,7 +12,7 @@ type Image {
   id: ID!
   name: String!
   url: String!
-  thumbnailUrl: String!
+  thumbnailUrl: String
   filename: String!
 }
 
