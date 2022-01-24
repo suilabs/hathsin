@@ -8,7 +8,8 @@
     "start:watch": "nodemon --exec npm run start:dev",
     "start:dev": "NODE_ENV=dev node -r @babel/register ./src/server.js",
     "start": "node build/server.js",
-    "build:server": "NODE_ENV=production babel -d ./build ./src && mkdir -p ./build/docs && cp ./docs/* ./build/docs/*"
+    "build:server": "NODE_ENV=production babel -d ./build ./src && mkdir -p ./build/docs && cp ./docs/* ./build/docs/*",
+    "run:migration": "node src/migrations/runner.js"
   },
   "keywords": [
     "server",

@@ -13,8 +13,18 @@ export const STATUS = {
   DELETED: "DELETED",
 };
 
-class ProjectModel extends AbstractModel {
+const cmp = (a, b) => {
+  if (a.date && b.date) {
+    return a.date.getTime() - b.date.getTime()
+  }
+  if (a.date) {
+    return 1
+  }
 
+  return -1
+};
+
+class ProjectModel extends AbstractModel {
   static modelName = 'projects';
   static schema = {
     ...CommonTypes.idNameSchema,
@@ -27,6 +37,7 @@ class ProjectModel extends AbstractModel {
     type: {type: String, ref: 'projectTypes'},
     configuration: [configurationSchema],
     languages: [String],
+    date: Date,
   };
 
   constructor() {
@@ -34,11 +45,11 @@ class ProjectModel extends AbstractModel {
   }
 
   async getAllByStatus(status) {
-    return this.getAll({ status });
+    return this.getAll({ status }).then(r => r.sort(cmp));
   }
 
   async getPublishedAndDraft() {
-    return this.getAll({ status: { $in: [STATUS.DRAFT, STATUS.PUBLISHED]}})
+    return this.getAll({ status: { $in: [STATUS.DRAFT, STATUS.PUBLISHED]}}).then(r => r.sort(cmp))
   }
 
   async delete(id) {

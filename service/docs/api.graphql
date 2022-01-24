@@ -27,6 +27,8 @@ enum Status {
   DELETED
 }
 
+scalar Date
+
 type Project {
   id: ID!
   name: String!
@@ -38,6 +40,7 @@ type Project {
   section: Section!
   configuration: [Configuration]
   languages : [String]
+  date: Date
 }
 
 type Query {
@@ -71,6 +74,7 @@ input ProjectInput {
   section: String! #id of the section to use.
   configuration: [ConfigurationInput]
   languages: [String]
+  date: Date!
 }
 
 input UpdateProjectInput {
@@ -83,6 +87,7 @@ input UpdateProjectInput {
   section: String #id of the section to use.
   configuration: [ConfigurationInput]
   languages: [String]
+  date: Date
 }
 
 type Mutation {
